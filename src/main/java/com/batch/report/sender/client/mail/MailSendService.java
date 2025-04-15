@@ -1,6 +1,6 @@
 package com.batch.report.sender.client.mail;
 
-import com.batch.report.sender.client.helper.EmailProperties;
+import com.batch.report.sender.config.MailConfig;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,9 +13,10 @@ import java.io.UnsupportedEncodingException;
 public class MailSendService {
 
     private final JavaMailSender javaMailSender;
-    private final EmailProperties emailProperties;
+    private final MailConfig emailProperties;
 
-    public MailSendService(JavaMailSender javaMailSender, EmailProperties emailProperties) {
+    public MailSendService(JavaMailSender javaMailSender,
+                           MailConfig emailProperties) {
         this.javaMailSender = javaMailSender;
         this.emailProperties = emailProperties;
     }
@@ -27,7 +28,7 @@ public class MailSendService {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
-            helper.setFrom(emailProperties.getSender(),emailProperties.getSenderName());
+            helper.setFrom(emailProperties.getUsername());
             javaMailSender.send(mimeMessage);
 
             return "메일발송 성공";
