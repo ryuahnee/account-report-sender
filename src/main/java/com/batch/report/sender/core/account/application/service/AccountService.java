@@ -1,6 +1,8 @@
 package com.batch.report.sender.core.account.application.service;
 
 import com.batch.report.sender.core.account.domain.AccountHistory;
+import com.batch.report.sender.core.account.domain.AccountResponse;
+import com.batch.report.sender.core.account.domain.AccountVcpInfo;
 import com.batch.report.sender.core.account.util.DateUtil;
 import com.batch.report.sender.data.jpa.AccountHistoryRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +47,8 @@ public class AccountService {
     // 현재 데이터와
 
 
-
+    public List<AccountResponse> findAccountVcpInfoByAccountId() {
+        return accountHistoryRepository.findAccountInfoWithVcpInfo();
+    }
 
 }

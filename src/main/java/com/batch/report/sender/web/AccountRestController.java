@@ -1,8 +1,8 @@
 package com.batch.report.sender.web;
 
-import com.batch.report.sender.bath.AccountChangeReportBatchConfig;
 import com.batch.report.sender.core.account.application.service.AccountService;
 import com.batch.report.sender.core.account.domain.AccountHistory;
+import com.batch.report.sender.core.account.domain.AccountResponse;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -32,6 +32,16 @@ public class AccountRestController {
     public ResponseEntity<List<AccountHistory>> test(){
         return ResponseEntity.ok(accountService.findUpdatedAccountHistories());
     }
+
+
+    @GetMapping("/vcp_info")
+    public ResponseEntity<List<AccountResponse>> tests() {
+        return ResponseEntity.ok(accountService.findAccountVcpInfoByAccountId());
+    }
+
+
+
+
     @GetMapping("/report-job")
     public String runAccountChangeReportJob() {
         try {
